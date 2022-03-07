@@ -17,4 +17,9 @@ public class FakeBookDataAccessService implements BookDao {
         DB.add(new Book(id, book.getName()));
         return 1;
     }
+
+    @Override
+    public List<Book> selectAllBooks() {
+        return DB;
+    }
 }
