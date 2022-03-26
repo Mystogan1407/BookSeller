@@ -1,16 +1,13 @@
 package com.example.demo.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("api/v1/book")
 @RestController
@@ -31,5 +28,20 @@ public class BookController {
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
+    }
+
+    @GetMapping(path = "{id}")
+    public Book getBookById(@PathVariable("id") UUID id) {
+        return bookService.getBookById(id).orElse(null);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deleteBookById(@PathVariable("id") UUID id) {
+        bookService.deleteBookById(id);
+    }
+
+    @PutMapping
+    public void updateBookById(@RequestBody Book updateBook) {
+        bookService.updateBookById(updateBook.getId(), updateBook);
     }
 }

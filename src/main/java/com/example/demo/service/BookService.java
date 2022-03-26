@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.example.demo.dao.BookDao;
 import com.example.demo.model.Book;
@@ -25,5 +27,17 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookDao.selectAllBooks();
+    }
+
+    public Optional<Book> getBookById(UUID id) {
+        return bookDao.getBookById(id);
+    }
+
+    public int deleteBookById(UUID id) {
+        return bookDao.deleteBookById(id);
+    }
+
+    public int updateBookById(UUID id, Book updateBook) {
+        return bookDao.updateBookById(id, updateBook);
     }
 }
